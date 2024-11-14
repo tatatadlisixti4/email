@@ -19,6 +19,12 @@ $$$(document, 'DOMContentLoaded', () => {
             mostrarAlerta(`El Campo ${e.target.id} es obligatorio`, e.target.parentElement);
             return;
         }
+        if(e.target.id==='email' && !validarEmail(e.target.value)) {
+            mostrarAlerta('El Email no es Válido', e.target.parentElement);
+            return;
+        }
+
+
         limpiarAlerta(e.target.parentElement);
     }
 
@@ -36,5 +42,11 @@ $$$(document, 'DOMContentLoaded', () => {
         // Comprobar si hay una alerta renderizada
         const alerta = $$$$(referencia, '.bg-red-600');
         if(alerta) alerta.remove();
+    }
+
+    function validarEmail(email) {
+        const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+        const resultado = regex.test(email);
+        return resultado;
     }
 })
