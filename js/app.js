@@ -11,9 +11,7 @@ $$$(document, 'DOMContentLoaded', () => {
     const formulario = $('#formulario');
     
     $$$(inputEmail, 'blur', validar);
-
     $$$(inputAsunto, 'blur', validar);
-
     $$$(inputMensaje, 'blur', validar);
 
     function validar(e) {
@@ -25,6 +23,11 @@ $$$(document, 'DOMContentLoaded', () => {
     }
 
     function mostrarAlerta(mensaje, referencia) {
+        // Comprobar si hay una alerta renderizada
+        const alerta = $$$$(referencia, '.bg-red-600');
+        if(alerta) alerta.remove();
+
+        // Generar alerta
         const error = document.createElement('P');
         error.textContent = mensaje;
         error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center');
