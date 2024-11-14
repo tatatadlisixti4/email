@@ -15,18 +15,23 @@ $$$(document, 'DOMContentLoaded', () => {
     const inputAsunto = $('#asunto');
     const inputMensaje = $('#mensaje');
     const formulario = $('#formulario');
+    const btnSubmit = $('#formulario button[type="submit"]');
     
-    $$$(inputEmail, 'blur', validar);
-    $$$(inputAsunto, 'blur', validar);
-    $$$(inputMensaje, 'blur', validar);
+    $$$(inputEmail, 'input', validar);
+    $$$(inputAsunto, 'input', validar);
+    $$$(inputMensaje, 'input', validar);
 
     function validar(e) {
         if(e.target.value.trim() === '') {
             mostrarAlerta(`El Campo ${e.target.id} es obligatorio`, e.target.parentElement);
+            email[e.target.name] = '';
+            comprobarEmail();
             return;
         }
         if(e.target.id==='email' && !validarEmail(e.target.value)) {
             mostrarAlerta('El Email no es Válido', e.target.parentElement);
+            email[e.target.name] = '';
+            comprobarEmail();
             return;
         }
 
@@ -62,9 +67,14 @@ $$$(document, 'DOMContentLoaded', () => {
 
     function comprobarEmail() {
         const vacio = Object.values(email).includes('');
-        if(!vacio) {
-            
-        }
+        if(vacio) {
+            btnSubmit.classList.add('opacity-50');
+            btnSubmit.disabled = true;
+            return;
+        } 
+        
+        btnSubmit.classList.remove('opacity-50');
+        btnSubmit.disabled = false;
 
     }
 })
