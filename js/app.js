@@ -8,6 +8,7 @@ $$$(document, 'DOMContentLoaded', () => {
     const inputEmail = $('#email');
     const inputAsunto = $('#asunto');
     const inputMensaje = $('#mensaje');
+    const formulario = $('#formulario');
     
     $$$(inputEmail, 'blur', validar);
 
@@ -24,7 +25,9 @@ $$$(document, 'DOMContentLoaded', () => {
     }
 
     function mostrarAlerta() {
-        const error = document.createElement('');
+        const error = document.createElement('P');
         error.textContent = 'Hubo un error...';
-    }
+        error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center');
+        formulario.appendChild(error);
+    }   
 })
