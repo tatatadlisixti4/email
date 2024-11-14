@@ -8,8 +8,14 @@ $$$(document, 'DOMContentLoaded', () => {
     const inputEmail = $('#email');
     const inputAsunto = $('#asunto');
     const inputMensaje = $('#mensaje');
-    console.log(inputEmail);
-    console.log(inputAsunto);
-    console.log(inputMensaje);
+    
+    $$$(inputEmail, 'blur', (e) => {
+        console.log(e.target.value);
+    });
+
+
+    
+    // console.log(inputAsunto);
+    // console.log(inputMensaje);
     
 })
