@@ -17,15 +17,13 @@ $$$(document, 'DOMContentLoaded', () => {
     function validar(e) {
         if(e.target.value.trim() === '') {
             mostrarAlerta(`El Campo ${e.target.id} es obligatorio`, e.target.parentElement);
-        } else {
-            console.log('con contenido');
+            return;
         }
+        limpiarAlerta(e.target.parentElement);
     }
 
     function mostrarAlerta(mensaje, referencia) {
-        // Comprobar si hay una alerta renderizada
-        const alerta = $$$$(referencia, '.bg-red-600');
-        if(alerta) alerta.remove();
+        limpiarAlerta(referencia);
 
         // Generar alerta
         const error = document.createElement('P');
@@ -33,4 +31,10 @@ $$$(document, 'DOMContentLoaded', () => {
         error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center');
         referencia.appendChild(error);
     }   
+
+    function limpiarAlerta(referencia) {
+        // Comprobar si hay una alerta renderizada
+        const alerta = $$$$(referencia, '.bg-red-600');
+        if(alerta) alerta.remove();
+    }
 })
