@@ -7,13 +7,15 @@ $$$(document, 'DOMContentLoaded', () => {
     const email = {
         email: '', 
         asunto: '',
-        mensaje: ''
+        mensaje: '',
+        cc: ''
     }
 
     // Seleccionar los elementos de la interfaz
     const inputEmail = $('#email');
     const inputAsunto = $('#asunto');
     const inputMensaje = $('#mensaje');
+    const inputCC = $('#cc');
     const formulario = $('#formulario');
     const btnSubmit = $('#formulario button[type="submit"]');
     const btnReset = $('#formulario button[type="reset"]');
@@ -22,6 +24,8 @@ $$$(document, 'DOMContentLoaded', () => {
     $$$(inputEmail, 'input', validar);
     $$$(inputAsunto, 'input', validar);
     $$$(inputMensaje, 'input', validar);
+    $$$(inputCC, 'input', validar);
+    
 
     $$$(formulario, 'submit', enviarEmail);
 
@@ -56,12 +60,24 @@ $$$(document, 'DOMContentLoaded', () => {
 
     function validar(e) {
         if(e.target.value.trim() === '') {
+            if(e.target.id === 'cc') {
+                email[e.target.name] = '';
+                limpiarAlerta(e.target.parentElement);
+                return;
+            }
+            
             mostrarAlerta(`El Campo ${e.target.id} es obligatorio`, e.target.parentElement);
             email[e.target.name] = '';
             comprobarEmail();
             return;
         }
         if(e.target.id==='email' && !validarEmail(e.target.value)) {
+            mostrarAlerta('El Email no es Válido', e.target.parentElement);
+            email[e.target.name] = '';
+            comprobarEmail();
+            return;
+        }
+        if(e.target.id==='cc' && !validarEmail(e.target.value)) {
             mostrarAlerta('El Email no es Válido', e.target.parentElement);
             email[e.target.name] = '';
             comprobarEmail();
@@ -96,14 +112,15 @@ $$$(document, 'DOMContentLoaded', () => {
         return resultado;
     }
 
-    function comprobarEmail() {
+    function comprobarEmail() {  
+        
         const vacio = Object.values(email).includes('');
         if(vacio) {
             btnSubmit.classList.add('opacity-50');
             btnSubmit.disabled = true;
             return;
         } 
-        
+
         btnSubmit.classList.remove('opacity-50');
         btnSubmit.disabled = false;
     }
