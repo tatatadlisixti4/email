@@ -27,19 +27,19 @@ $$$(document, 'DOMContentLoaded', () => {
 
     $$$(btnReset, 'click', (e) => {
         e.preventDefault();
-
-        Object.keys(email).forEach(key => {
-            email[key] = '';
-        });
-
-        formulario.reset();
-        comprobarEmail();
+        resetFormulario();
     });
 
     function enviarEmail(e) {
         e.preventDefault();
         spinner.classList.add('flex');
         spinner.classList.remove('hidden');
+
+        setTimeout(() => {
+            spinner.classList.remove('flex');
+            spinner.classList.add('hidden');
+            resetFormulario();
+        }, 3000);
     }
 
     function validar(e) {
@@ -56,9 +56,7 @@ $$$(document, 'DOMContentLoaded', () => {
             return;
         }
 
-
         limpiarAlerta(e.target.parentElement);
-
         // Asignar los valores
         email[e.target.name] = e.target.value.trim().toLowerCase();
         comprobarEmail(); 
@@ -96,6 +94,14 @@ $$$(document, 'DOMContentLoaded', () => {
         
         btnSubmit.classList.remove('opacity-50');
         btnSubmit.disabled = false;
+    }
 
+    function resetFormulario() {
+        Object.keys(email).forEach(key => {
+            email[key] = '';
+        });
+
+        formulario.reset();
+        comprobarEmail();
     }
 })
