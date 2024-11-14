@@ -9,13 +9,14 @@ $$$(document, 'DOMContentLoaded', () => {
     const inputAsunto = $('#asunto');
     const inputMensaje = $('#mensaje');
     
-    $$$(inputEmail, 'blur', (e) => {
+    $$$(inputEmail, 'blur', validar);
+
+    $$$(inputAsunto, 'blur', validar);
+
+    $$$(inputMensaje, 'blur', validar);
+
+    function validar(e) {
         console.log(e.target.value);
-    });
-
-
-    
-    // console.log(inputAsunto);
-    // console.log(inputMensaje);
-    
+        
+    }
 })
