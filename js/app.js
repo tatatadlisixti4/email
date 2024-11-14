@@ -17,9 +17,14 @@ $$$(document, 'DOMContentLoaded', () => {
 
     function validar(e) {
         if(e.target.value.trim() === '') {
-            console.log('vacio');
+            mostrarAlerta();
         } else {
             console.log('con contenido');
         }
+    }
+
+    function mostrarAlerta() {
+        const error = document.createElement('');
+        error.textContent = 'Hubo un error...';
     }
 })
