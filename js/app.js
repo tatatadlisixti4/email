@@ -16,10 +16,22 @@ $$$(document, 'DOMContentLoaded', () => {
     const inputMensaje = $('#mensaje');
     const formulario = $('#formulario');
     const btnSubmit = $('#formulario button[type="submit"]');
+    const btnReset = $('#formulario button[type="reset"]');
     
     $$$(inputEmail, 'input', validar);
     $$$(inputAsunto, 'input', validar);
     $$$(inputMensaje, 'input', validar);
+
+    $$$(btnReset, 'click', (e) => {
+        e.preventDefault();
+
+        Object.keys(email).forEach(key => {
+            email[key] = '';
+        });
+
+        formulario.reset();
+        comprobarEmail();
+    });
 
     function validar(e) {
         if(e.target.value.trim() === '') {
