@@ -17,10 +17,13 @@ $$$(document, 'DOMContentLoaded', () => {
     const formulario = $('#formulario');
     const btnSubmit = $('#formulario button[type="submit"]');
     const btnReset = $('#formulario button[type="reset"]');
+    const spinner = $('#spinner');
     
     $$$(inputEmail, 'input', validar);
     $$$(inputAsunto, 'input', validar);
     $$$(inputMensaje, 'input', validar);
+
+    $$$(formulario, 'submit', enviarEmail);
 
     $$$(btnReset, 'click', (e) => {
         e.preventDefault();
@@ -32,6 +35,12 @@ $$$(document, 'DOMContentLoaded', () => {
         formulario.reset();
         comprobarEmail();
     });
+
+    function enviarEmail(e) {
+        e.preventDefault();
+        spinner.classList.add('flex');
+        spinner.classList.remove('hidden');
+    }
 
     function validar(e) {
         if(e.target.value.trim() === '') {
