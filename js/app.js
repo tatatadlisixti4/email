@@ -4,6 +4,12 @@ const $$$ = (element, event, handler) => element.addEventListener(event, handler
 const $$$$ = (father, son) => father.querySelector(son);
 
 $$$(document, 'DOMContentLoaded', () => {
+    const email = {
+        email: '', 
+        asunto: '',
+        mensaje: ''
+    }
+
     // Seleccionar los elementos de la interfaz
     const inputEmail = $('#email');
     const inputAsunto = $('#asunto');
@@ -26,6 +32,10 @@ $$$(document, 'DOMContentLoaded', () => {
 
 
         limpiarAlerta(e.target.parentElement);
+
+        // Asignar los valores
+        email[e.target.name] = e.target.value.trim().toLowerCase();
+        comprobarEmail(); 
     }
 
     function mostrarAlerta(mensaje, referencia) {
@@ -48,5 +58,13 @@ $$$(document, 'DOMContentLoaded', () => {
         const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         const resultado = regex.test(email);
         return resultado;
+    }
+
+    function comprobarEmail() {
+        const vacio = Object.values(email).includes('');
+        if(!vacio) {
+            
+        }
+
     }
 })
